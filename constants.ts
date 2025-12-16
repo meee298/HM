@@ -23,7 +23,7 @@ export const GENRES = [
   'شبابي'
 ];
 
-const STORAGE_KEY = 'cinema_stream_content_v27'; // Incremented key to force load new content
+const STORAGE_KEY = 'cinema_stream_content_v28'; // Incremented key to force load new content
 const WATCHLIST_KEY = 'cinema_watchlist';
 
 // Helper to generate VidKing Movie Iframe
@@ -79,6 +79,28 @@ export const MOCK_MOVIES: Movie[] = [
     episodes: generateEpisodes(131927, [10]),
     additionalServers: []
   },
+  {
+    id: 'it_welcome_to_derry',
+    type: 'series',
+    title: "It: Welcome to Derry",
+    description: 'سلسلة درامية تستكشف أصول الرعب في مدينة ديري، كيف بدأ كل شيء قبل أن يجتمع الأطفال السبعة، وكيف استيقظ الشر من سباته.',
+    embedCode: '',
+    iframeSrc: '',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/nyy3BITeIjviv6PFIXtqvc8i6xi.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/2fOKVDoc2O3eZmBZesWPuE5kgPN.jpg',
+    rating: '18+',
+    genre: ['رعب', 'دراما', 'غموض'],
+    year: 2024,
+    duration: '1 موسم',
+    director: 'Andy Muschietti',
+    cast: ['Bill Skarsgård'],
+    views: 420000,
+    addedAt: '2024-06-01',
+    isFeatured: true,
+    quality: '4K',
+    episodes: generateEpisodes(200875, [8]),
+    additionalServers: []
+    },
   {
     id: 'dexter_resurrection',
     type: 'series',
