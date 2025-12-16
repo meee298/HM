@@ -23,7 +23,7 @@ export const GENRES = [
   'شبابي'
 ];
 
-const STORAGE_KEY = 'cinema_stream_content_v22'; // Incremented key to force load new content
+const STORAGE_KEY = 'cinema_stream_content_v25'; // Incremented key to force load new content
 const WATCHLIST_KEY = 'cinema_watchlist';
 
 // Helper to generate VidKing Movie Iframe
@@ -154,8 +154,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'آيم سول، معجبة مهووسة، تصاب بصدمة عارمة بوفاة نجمها المفضل ريو صن جاي. تسافر عبر الزمن إلى الماضي لإنقاذه من مصيره المأساوي، وتنشأ بينهما قصة حب تتجاوز الزمن.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/5j246m2aXjZk7J6j6j6j6j6j6.jpg', // Placeholder hash
-    backdropUrl: 'https://image.tmdb.org/t/p/original/xY6j6j6j6j6j6j6j6j6j6j6j6.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xJQyrif5M4UMoVBrBlwUabtaRxB.jpg', // Placeholder hash
+    backdropUrl: 'https://media.themoviedb.org/t/p/w500_and_h282_face/vbkpl0ps4s5tMTUnC7SFXNzWmVr.jpg',
     rating: '13+',
     genre: ['كوري', 'رومانسي', 'فانتازيا', 'كوميديا', 'شبابي'],
     year: 2024,
@@ -166,7 +166,7 @@ export const MOCK_MOVIES: Movie[] = [
     addedAt: '2024-04-08',
     isFeatured: true,
     quality: 'FHD',
-    episodes: generateEpisodes(235946, [16]), // Corrected ID
+    episodes: generateEpisodes(230923, [16]), // Corrected ID
     additionalServers: []
   },
   {
@@ -176,8 +176,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'قصة حب معجزة وحالمة وفكاهية بين زوجين يمران بأزمة زوجية خطيرة (محامية وريثة مجموعة كوينز ومدير قانوني)، ويتمكنان من النجاة والبقاء معاً رغم كل الصعاب.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/shX309023423.jpg', 
-    backdropUrl: 'https://image.tmdb.org/t/p/original/234234234.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/7ZXLZ3KYL3IVvsSHBZaHjcNQzNU.jpg', 
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/wcP3FsRLog4GNEs9PFrDKKQdcof.jpg',
     rating: '13+',
     genre: ['كوري', 'رومانسي', 'دراما'],
     year: 2024,
@@ -188,7 +188,7 @@ export const MOCK_MOVIES: Movie[] = [
     addedAt: '2024-03-09',
     isFeatured: true,
     quality: '4K',
-    episodes: generateEpisodes(206589, [16]), // Corrected ID
+    episodes: generateEpisodes(215720, [16]), // Corrected ID
     additionalServers: []
   },
   {
@@ -198,8 +198,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'تُقتل امرأة مريضة بالسرطان على يد زوجها وصديقتها المقربة بعد اكتشاف خيانتهما. تستيقظ قبل 10 سنوات من الحادثة وتقرر تغيير مصيرها بالانتقام منهما.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/a234234234.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/b234234234.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/dvmnUM7SqMu84lBcECLQ7Ho77oj.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/8WtvyyT8kTuCs3z33s5xWgSqE8b.jpg',
     rating: '13+',
     genre: ['كوري', 'دراما', 'انتقام', 'رومانسي'],
     year: 2024,
@@ -210,7 +210,7 @@ export const MOCK_MOVIES: Movie[] = [
     addedAt: '2024-01-01',
     isFeatured: false,
     quality: 'FHD',
-    episodes: generateEpisodes(215233, [16]), // Corrected ID
+    episodes: generateEpisodes(221851, [16]), // Corrected ID
     additionalServers: []
   },
   {
@@ -220,8 +220,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'طالبة ثانوية تعاني من التنمر بسبب مظهرها، تتعلم فن المكياج وتتحول إلى "إلهة" الجمال في مدرستها، لكنها تعيش في خوف دائم من اكتشاف وجهها الحقيقي، وتقع في مثلث حب.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/mn1H555234.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/23452345.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/sld43SJArZqlnANJabq8R5wdOZk.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w500_and_h282_face/A9OMk9nybfRQUX7ds8rpd4lmdaE.jpg',
     rating: '13+',
     genre: ['كوري', 'رومانسي', 'كوميديا', 'مدرسي'],
     year: 2020,
@@ -242,8 +242,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'نائب رئيس شركة نرجسي للغاية يصاب بالذهول عندما تقرر سكرتيرته الشخصية الماهرة والمخلصة الاستقالة فجأة بعد 9 سنوات من العمل معه، فيفعل المستحيل لإبقائها.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/698769876.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/98769876.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/w6muIYgrx1XZFombs3N8owfgLwf.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/kW8OwaOkJVtw7nLvkKZvm89I9Fl.jpg',
     rating: '13+',
     genre: ['كوري', 'رومانسي', 'كوميديا'],
     year: 2018,
@@ -2725,8 +2725,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'ريموند "ريد" ريدنجتون، أحد أكثر الهاربين المطلوبين لمكتب التحقيقات الفيدرالي، يسلم نفسه ويوافق على مساعدة المكتب في القبض على مجرمين آخرين.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/r935SMphvXPPTLSFmq37S6D4G7r.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/7PzJdsLGlR78WCh3v4UL7pxNbBd.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/4HTfd1PhgFUenJxVuBDNdLmdr0c.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/2eIlCirgcvEwmCSYh2wDfz5Sxvz.jpg',
     rating: '13+',
     genre: ['جريمة', 'دراما', 'غموض'],
     year: 2013,
@@ -2747,8 +2747,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'يستكشف المسلسل العلاقة المبكرة بين الطبيب النفسي الشهير هانيبال ليكتر ومحلل الجرائم الشاب في مكتب التحقيقات الفيدرالي ويل غراهام.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/ukc0Z4aK1Xg582u8yqH6j2y57.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/9r1y4u8R8w4w8a5g8f7q9z2l3.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/pbV2eLnKSIm1epSZt473UYfqaeZ.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/vlG182ZY2WMzD5bjFZNnhyvv5V4.jpg',
     rating: '18+',
     genre: ['رعب', 'جريمة', 'دراما'],
     year: 2013,
@@ -2769,8 +2769,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'توني سوبرانو، زعيم مافيا في نيوجيرسي، يحاول التوفيق بين مشاكل عائلته ومتطلبات منظمته الإجرامية، مما يدفعه لزيارة طبيبة نفسية.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/u0h6e5w9w2e4h7e8f1f1.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/5Eu1C2Hlq3y4r6k7j6n8o5.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/rTc7ZXdroqjkKivFPvCPX0Ru7uw.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w500_and_h282_face/isJ4POBlbH5kmHVgbdP4gC4nFqO.jpg',
     rating: '18+',
     genre: ['جريمة', 'دراما'],
     year: 1999,
@@ -2791,8 +2791,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'ملحمة عائلية تدور أحداثها في برمنغهام، إنجلترا، عام 1919، وتتركز حول عصابة تخيط شفرات الحلاقة في قبعاتها وزعيمهم الشرس تومي شيلبي.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaKVlVGkWcTCZ.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/cz25H7g9F4w9c7f6j6j5h3.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w220_and_h330_face/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/l8v3gJDlASN0lNn51gR8zQJsu5O.jpg',
     rating: '18+',
     genre: ['جريمة', 'دراما'],
     year: 2013,
@@ -2813,8 +2813,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'تحديث عصري لقصص المحقق الشهير شيرلوك هولمز وشريكه الدكتور جون واتسون وهما يحلان الجرائم في لندن في القرن الثالث عشر.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/sw7mordbZxgKS8sCeIdnRzsIkMw.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/f9r2y6e5f8w3.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/7WTsnHkbA0FaG6R9twfFde0I9hl.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/8rvLEmdI4gLrMO1rLqbNdnNcPFE.jpg',
     rating: '13+',
     genre: ['جريمة', 'غموض', 'دراما'],
     year: 2010,
@@ -2835,8 +2835,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'في أواخر السبعينيات، يحاول عميلان من مكتب التحقيقات الفيدرالي توسيع العلوم الجنائية من خلال الغوص في سيكولوجية القتل والاقتراب من الوحوش الحقيقية.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/fbKE87l1w8H0g9q7A4.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/yGnJP10.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/fbKE87mojpIETWepSbD5Qt741fp.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/a906PH7CDmSOdS7kmnAgdWk5mhv.jpg',
     rating: '18+',
     genre: ['جريمة', 'دراما', 'إثارة'],
     year: 2017,
@@ -2857,8 +2857,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'مسلسل مختارات يتتبع تحقيقات الشرطة التي تكشف عن الأسرار الشخصية والمهنية للمشاركين فيها، داخل وخارج القانون.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/cuV2O5ZyDLHSKY86K25j4Bpx14g.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/hXgmJPd4J31b1vj5j5.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/cuV2O5ZyDLHSOWzg3nLVljp1ubw.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/bPLRjO2pcBx0WL73WUPzuNzQ3YN.jpg',
     rating: '18+',
     genre: ['جريمة', 'دراما', 'غموض'],
     year: 2014,
@@ -2925,3 +2925,4 @@ export const toggleWatchlist = (id: string): boolean => {
     return false;
   }
 };
+
