@@ -23,7 +23,7 @@ export const GENRES = [
   'شبابي'
 ];
 
-const STORAGE_KEY = 'cinema_stream_content_v25'; // Incremented key to force load new content
+const STORAGE_KEY = 'cinema_stream_content_v26'; // Incremented key to force load new content
 const WATCHLIST_KEY = 'cinema_watchlist';
 
 // Helper to generate VidKing Movie Iframe
@@ -110,8 +110,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'ثلاثة لصوص يقتحمون منزل رجل كفيف ثري معتقدين أنهم سيرتكبون السرقة المثالية، لكنهم يكتشفون خطأهم الفادح عندما يجدون أنفسهم في مواجهة قاتل لا يرحم.',
     embedCode: movieFrame(300669),
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/lwPA299hA504j0K8s2oW929sX5.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/m5O3SZvQ6EgD5XXXLPIP1wLppeW.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/dSxHyPZ2nipSfvdft4IhQKjk5eZ.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/bbwS32U9apV3c1fInFkyG1oi7L2.jpg',
     rating: '18+',
     genre: ['رعب', 'إثارة', 'جريمة'],
     year: 2016,
@@ -131,8 +131,8 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'الرجل الكفيف يختبئ في كوخ معزول ويربي فتاة يتيمة نجت من حريق منزل، لكن حياتهم الهادئة تتحطم عندما تقوم عصابة باختطاف الفتاة، مما يجبره على العودة لأساليبه الوحشية.',
     embedCode: movieFrame(482373),
     iframeSrc: '',
-    thumbnailUrl: 'https://image.tmdb.org/t/p/w500/hRMfgGFRAZIlvwVWy8DYJdLTpvN.jpg',
-    backdropUrl: 'https://image.tmdb.org/t/p/original/kTOheVZQHBQxKO8tX8M9r8.jpg',
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/aOu6PJVO9RyGAzdUwG6fupu0gpz.jpg',
+    backdropUrl: 'https://media.themoviedb.org/t/p/w533_and_h300_face/2whxXw8Np0ffmxCdsdpp8yBK1XS.jpg',
     rating: '18+',
     genre: ['رعب', 'إثارة', 'أكشن'],
     year: 2021,
@@ -154,7 +154,7 @@ export const MOCK_MOVIES: Movie[] = [
     description: 'آيم سول، معجبة مهووسة، تصاب بصدمة عارمة بوفاة نجمها المفضل ريو صن جاي. تسافر عبر الزمن إلى الماضي لإنقاذه من مصيره المأساوي، وتنشأ بينهما قصة حب تتجاوز الزمن.',
     embedCode: '',
     iframeSrc: '',
-    thumbnailUrl: 'https://media.themoviedb.org/t/p/w220_and_h330_face/xJQyrif5M4UMoVBrBlwUabtaRxB.jpg', // Placeholder hash
+    thumbnailUrl: 'https://media.themoviedb.org/t/p/w300_and_h450_face/xJQyrif5M4UMoVBrBlwUabtaRxB.jpg', // Placeholder hash
     backdropUrl: 'https://media.themoviedb.org/t/p/w500_and_h282_face/vbkpl0ps4s5tMTUnC7SFXNzWmVr.jpg',
     rating: '13+',
     genre: ['كوري', 'رومانسي', 'فانتازيا', 'كوميديا', 'شبابي'],
