@@ -95,7 +95,7 @@ const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
   );
 };
 
-const Carousel = ({ title, icon, movies, variant = 'portrait' }: { title: string, icon?: React.ReactNode, movies: Movie[], variant?: 'portrait' | 'trending' }) => {
+const Carousel = ({ id, title, icon, movies, variant = 'portrait' }: { id?: string, title: string, icon?: React.ReactNode, movies: Movie[], variant?: 'portrait' | 'trending' }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -106,7 +106,7 @@ const Carousel = ({ title, icon, movies, variant = 'portrait' }: { title: string
   if (movies.length === 0) return null;
 
   return (
-    <div className="py-6 group/carousel relative animate-fadeIn">
+    <div id={id} className="py-6 group/carousel relative animate-fadeIn scroll-mt-24">
       <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 max-w-[1600px] mx-auto w-full mb-4">
         <h2 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2 tracking-tight">{icon} {title}</h2>
       </div>
@@ -217,9 +217,9 @@ const HomePage: React.FC = () => {
           </div>
         ) : (
           <>
-            <Carousel title="رائج الآن" icon={<TrendingUp className="w-5 h-5 text-red-600" />} movies={sections.trending} variant="trending" />
-            <Carousel title="أضيف حديثاً" icon={<Zap className="w-5 h-5 text-yellow-500" />} movies={sections.recent} />
-            <Carousel title="مسلسلات مختارة" icon={<Tv className="w-5 h-5 text-purple-500" />} movies={sections.series} />
+            <Carousel id="popular" title="رائج الآن" icon={<TrendingUp className="w-5 h-5 text-red-600" />} movies={sections.trending} variant="trending" />
+            <Carousel id="movies" title="أضيف حديثاً" icon={<Zap className="w-5 h-5 text-yellow-500" />} movies={sections.recent} />
+            <Carousel id="series" title="مسلسلات مختارة" icon={<Tv className="w-5 h-5 text-purple-500" />} movies={sections.series} />
             <Carousel title="أفلام الأكشن" icon={<Flame className="w-5 h-5 text-orange-500" />} movies={sections.action} />
           </>
         )}
