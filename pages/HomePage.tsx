@@ -4,11 +4,7 @@ import Navbar from '../components/Navbar';
 import MovieCard from '../components/MovieCard';
 import { MovieService, GENRES } from '../constants';
 import { Movie } from '../types';
-import { 
-  Play, Info, ChevronLeft, ChevronRight, Star, Flame, TrendingUp, 
-  Film, Zap, Tv, Filter, X, ChevronDown, Layers, Loader2, Sparkles,
-  Ghost, Laugh, Cat, Globe, Rocket
-} from 'lucide-react';
+import { Play, Info, ChevronLeft, ChevronRight, Star, Flame, TrendingUp, Film, Zap, Tv, Filter, X, ChevronDown, Layers, Loader2, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
@@ -20,7 +16,7 @@ const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % movies.length);
       setKey(prev => prev + 1);
-    }, 8000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [movies.length]);
 
@@ -32,7 +28,7 @@ const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
   if (movies.length === 0) return null;
 
   return (
-    <div className="hidden md:relative md:block h-[95vh] w-full overflow-hidden bg-black animate-fadeIn">
+    <div className="relative h-[70vh] md:h-[90vh] w-full overflow-hidden group font-sans bg-black">
       {movies.map((movie, index) => {
         const isActive = index === currentIndex;
         return (
@@ -40,49 +36,49 @@ const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
             key={movie.id}
             className={`absolute inset-0 transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
           >
-            <div className={`absolute inset-0 transition-transform duration-[12s] ease-linear ${isActive ? 'scale-110' : 'scale-100'}`}>
+            <div className={`absolute inset-0 transition-transform duration-[10s] ease-linear ${isActive ? 'scale-110' : 'scale-100'}`}>
                <img src={movie.backdropUrl} alt={movie.title} className="w-full h-full object-cover" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111] via-[#111]/50 to-transparent"></div>
           </div>
         );
       })}
 
-      <div className="relative z-20 h-full max-w-[1600px] mx-auto px-16 flex flex-col justify-center pt-20">
+      <div className="relative z-20 h-full max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-20 flex flex-col justify-center pt-24 pb-12">
          {movies.map((movie, index) => {
             if (index !== currentIndex) return null;
             return (
-              <div key={`${movie.id}-${key}`} className="max-w-3xl space-y-8 animate-[fadeInUp_0.8s_ease-out_forwards]">
-                  <div className="flex items-center gap-4">
-                     <span className="bg-red-600 text-white px-3 py-1 rounded-lg text-[11px] font-black tracking-widest uppercase shadow-2xl shadow-red-600/40">مميز</span>
+              <div key={`${movie.id}-${key}`} className="max-w-4xl space-y-6 animate-[fadeInUp_0.8s_ease-out_forwards]">
+                  <div className="flex items-center gap-3">
+                     <span className="bg-red-600 text-white px-2 py-0.5 rounded text-[10px] font-black tracking-widest uppercase shadow-lg shadow-red-900/50">Featured</span>
                      {movie.isTrending && (
-                       <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md text-gray-200 px-3 py-1 rounded-lg text-xs font-bold border border-white/10">
-                         <Flame className="w-3.5 h-3.5 text-orange-500 fill-current" /> الأكثر بحثاً
+                       <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md text-gray-200 px-2 py-0.5 rounded text-xs font-bold border border-white/5">
+                         <Flame className="w-3 h-3 text-red-500" /> Trending
                        </span>
                      )}
+                     <span className="bg-white/10 backdrop-blur-md text-white px-2 py-0.5 rounded text-xs font-bold border border-white/5">{movie.quality}</span>
                   </div>
                   
-                  <h1 className="text-6xl lg:text-8xl font-black text-white tracking-tighter leading-[0.9] text-shadow-lg" dir="ltr">{movie.title}</h1>
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-none drop-shadow-2xl" dir="ltr">{movie.title}</h1>
                   
-                  <div className="flex flex-wrap items-center gap-5 text-gray-300 text-sm font-bold">
-                    <span className="text-white bg-white/10 px-3 py-1 rounded-md">{movie.year}</span>
-                    <span className="w-1.5 h-1.5 bg-red-600 rounded-full"></span>
+                  <div className="flex flex-wrap items-center gap-4 text-gray-300 text-sm font-medium">
+                    <span className="text-white">{movie.year}</span>
+                    <span className="w-1 h-1 bg-red-600 rounded-full"></span>
                     <span>{movie.duration}</span>
-                    <span className="w-1.5 h-1.5 bg-gray-700 rounded-full"></span>
-                    <span className="border border-white/20 px-2 rounded-md text-xs">{movie.quality}</span>
+                    <span className="border border-white/20 px-1.5 rounded text-xs text-gray-300">{movie.rating}</span>
                   </div>
 
-                  <p className="text-gray-300 text-lg md:text-xl line-clamp-3 leading-relaxed max-w-2xl font-medium opacity-90 drop-shadow-md">{movie.description}</p>
+                  <p className="text-gray-300 text-base md:text-lg line-clamp-3 leading-relaxed max-w-2xl font-light">{movie.description}</p>
 
-                  <div className="flex flex-wrap items-center gap-5 pt-6">
-                    <Link to={`/movie/${movie.id}`} className="bg-red-600 hover:bg-red-700 text-white px-10 py-4.5 rounded-2xl font-black flex items-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-[0_15px_30px_rgba(229,9,20,0.3)] group">
-                      <Play className="w-6 h-6 fill-current group-hover:scale-110 transition-transform" />
-                      <span className="text-lg">شاهد الآن</span>
+                  <div className="flex flex-wrap items-center gap-3 pt-4">
+                    <Link to={`/movie/${movie.id}`} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3.5 rounded-full font-bold flex items-center gap-2 transition-all hover:scale-105 shadow-lg shadow-red-900/20 group">
+                      <Play className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
+                      <span>شاهد الآن</span>
                     </Link>
-                    <Link to={`/movie/${movie.id}`} className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4.5 rounded-2xl font-black flex items-center gap-3 transition-all border border-white/10">
-                      <Info className="w-6 h-6" />
-                      <span className="text-lg">التفاصيل</span>
+                    <Link to={`/movie/${movie.id}`} className="bg-white/5 hover:bg-white/10 backdrop-blur-md text-white px-6 py-3.5 rounded-full font-bold flex items-center gap-2 transition-all border border-white/10">
+                      <Info className="w-5 h-5" />
+                      <span>تفاصيل</span>
                     </Link>
                   </div>
               </div>
@@ -90,47 +86,47 @@ const HeroCarousel = ({ movies }: { movies: Movie[] }) => {
          })}
       </div>
 
-      <div className="absolute bottom-12 right-16 z-30 flex flex-col gap-3">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3 p-4 justify-center">
         {movies.map((_, idx) => (
-          <button key={idx} onClick={() => goToSlide(idx)} className={`w-1.5 transition-all duration-700 rounded-full ${idx === currentIndex ? 'h-10 bg-red-600 shadow-[0_0_15px_rgba(229,9,20,0.8)]' : 'h-3 bg-gray-600 hover:bg-white'}`} />
+          <button key={idx} onClick={() => goToSlide(idx)} className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentIndex ? 'w-8 bg-red-600' : 'w-2 bg-gray-600 hover:bg-white'}`} />
         ))}
       </div>
     </div>
   );
 };
 
-const Carousel = ({ id, title, icon, movies, variant = 'portrait' }: { id?: string, title: string, icon?: React.ReactNode, movies: Movie[], variant?: 'portrait' | 'trending' }) => {
+const Carousel = ({ title, icon, movies, variant = 'portrait' }: { title: string, icon?: React.ReactNode, movies: Movie[], variant?: 'portrait' | 'trending' }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = window.innerWidth > 768 ? 800 : 400;
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -600 : 600, behavior: 'smooth' });
     }
   };
 
   if (movies.length === 0) return null;
 
   return (
-    <div id={id} className="py-12 group/carousel relative animate-fadeIn scroll-mt-24">
-      <div className="max-w-[1600px] mx-auto px-8 sm:px-12 flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <div className="p-2.5 bg-white/5 rounded-2xl border border-white/10">{icon}</div>
-          <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">{title}</h2>
-        </div>
-        <div className="hidden md:flex gap-3">
-           <button onClick={() => scroll('right')} className="w-12 h-12 rounded-2xl bg-[#141414] border border-white/5 hover:bg-white hover:text-black transition-all flex items-center justify-center shadow-xl active:scale-90"> <ChevronRight className="w-6 h-6" /> </button>
-           <button onClick={() => scroll('left')} className="w-12 h-12 rounded-2xl bg-[#141414] border border-white/5 hover:bg-white hover:text-black transition-all flex items-center justify-center shadow-xl active:scale-90"> <ChevronLeft className="w-6 h-6" /> </button>
-        </div>
+    <div className="py-6 group/carousel relative animate-fadeIn">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 max-w-[1600px] mx-auto w-full mb-4">
+        <h2 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2 tracking-tight">{icon} {title}</h2>
       </div>
       
-      <div className="relative max-w-[1600px] mx-auto overflow-hidden">
-        <div ref={scrollRef} className="flex gap-6 overflow-x-auto px-8 sm:px-12 pb-8 scrollbar-hide snap-x items-start" style={{ scrollbarWidth: 'none' }}>
+      <div className="relative max-w-[1600px] mx-auto group">
+        <button onClick={() => scroll('right')} className="absolute right-0 top-0 bottom-4 z-40 w-12 bg-black/50 hover:bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hidden md:flex rounded-l-lg border-l border-white/10">
+          <ChevronRight className="w-10 h-10 text-white" />
+        </button>
+
+        <div ref={scrollRef} className="flex gap-4 overflow-x-auto px-4 sm:px-6 lg:px-8 pb-4 scrollbar-hide snap-x items-start" style={{ scrollbarWidth: 'none' }}>
           {movies.map((movie, index) => (
-            <div key={movie.id} className="snap-start flex-shrink-0 w-[160px] sm:w-[200px] md:w-[220px] card-hover-effect">
+            <div key={movie.id} className="snap-start flex-shrink-0 w-[140px] sm:w-[160px] md:w-[190px]">
               <MovieCard movie={movie} variant={variant} rank={index + 1} />
             </div>
           ))}
         </div>
+
+        <button onClick={() => scroll('left')} className="absolute left-0 top-0 bottom-4 z-40 w-12 bg-black/50 hover:bg-black/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hidden md:flex rounded-r-lg border-r border-white/10">
+          <ChevronLeft className="w-10 h-10 text-white" />
+        </button>
       </div>
     </div>
   );
@@ -149,9 +145,10 @@ const HomePage: React.FC = () => {
       setMovies(data);
       setIsLoading(false);
       
-      const hasSeenWelcome = localStorage.getItem('hasSeenWelcome_v2');
+      // Check for welcome message
+      const hasSeenWelcome = localStorage.getItem('hasSeenWelcome_v1');
       if (!hasSeenWelcome) {
-        setTimeout(() => setShowWelcome(true), 2000);
+        setTimeout(() => setShowWelcome(true), 1500);
       }
     };
     load();
@@ -159,7 +156,7 @@ const HomePage: React.FC = () => {
 
   const dismissWelcome = () => {
     setShowWelcome(false);
-    localStorage.setItem('hasSeenWelcome_v2', 'true');
+    localStorage.setItem('hasSeenWelcome_v1', 'true');
   };
 
   const filteredContent = useMemo(() => {
@@ -172,135 +169,92 @@ const HomePage: React.FC = () => {
   }, [movies, activeType, activeGenre]);
 
   const sections = useMemo(() => ({
-    hero: movies.filter(m => m.isFeatured).slice(0, 5),
+    hero: movies.filter(m => m.isFeatured).slice(0, 6),
     trending: movies.filter(m => m.isTrending).slice(0, 10),
-    recent: movies.slice(0, 15),
-    series: movies.filter(m => m.type === 'series').slice(0, 15),
-    horror: movies.filter(m => m.genre.includes('رعب')).slice(0, 15),
-    comedy: movies.filter(m => m.genre.includes('كوميديا')).slice(0, 15),
-    anime: movies.filter(m => m.genre.includes('أنيمي')).slice(0, 15),
-    korean: movies.filter(m => m.genre.includes('كوري') || m.genre.includes('تركي')).slice(0, 15),
-    adventure: movies.filter(m => m.genre.includes('مغامرة') || m.genre.includes('خيال علمي')).slice(0, 15)
+    recent: [...movies].reverse().slice(0, 12),
+    series: movies.filter(m => m.type === 'series').slice(0, 12),
+    action: movies.filter(m => m.genre.includes('أكشن')).slice(0, 12)
   }), [movies]);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 animate-fadeIn">
-          <div className="relative">
-             <div className="w-20 h-20 border-4 border-red-600/20 border-t-red-600 rounded-full animate-spin"></div>
-             <Film className="w-8 h-8 text-red-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-          </div>
-          <span className="text-gray-500 font-black text-xl tracking-widest uppercase">جاري تهيئة السينما...</span>
+      <div className="min-h-screen bg-[#111] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-12 h-12 text-red-600 animate-spin" />
+          <span className="text-gray-400 font-bold">جاري تحميل السينما...</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-red-600 font-sans overflow-x-hidden pb-20">
+    <div className="min-h-screen bg-[#111] text-white selection:bg-red-600 font-sans overflow-x-hidden">
       <Navbar />
+      <HeroCarousel movies={sections.hero} />
       
-      {/* Hero Carousel - Hidden on small screens */}
-      <div className="hidden md:block">
-        <HeroCarousel movies={sections.hero} />
-      </div>
-
-      {/* Spacing for mobile when hero is hidden */}
-      <div className="md:hidden h-24"></div>
-      
-      <div className="sticky top-[72px] md:top-[88px] z-40 bg-[#0a0a0a]/90 backdrop-blur-xl border-y border-white/5 py-5 shadow-2xl">
-        <div className="max-w-[1600px] mx-auto px-8 sm:px-12 flex flex-wrap items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex p-1 bg-black rounded-2xl border border-white/10 shadow-inner">
-               <button onClick={() => setActiveType('all')} className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all ${activeType === 'all' ? 'bg-red-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}>الكل</button>
-               <button onClick={() => setActiveType('movie')} className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all ${activeType === 'movie' ? 'bg-red-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}>أفلام</button>
-               <button onClick={() => setActiveType('series')} className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all ${activeType === 'series' ? 'bg-red-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}>مسلسلات</button>
-            </div>
-            
-            <select 
-              value={activeGenre} 
-              onChange={(e) => setActiveGenre(e.target.value)} 
-              className="bg-black text-white px-6 py-3 rounded-2xl border border-white/10 text-xs font-bold outline-none focus:border-red-600 transition-all cursor-pointer shadow-lg appearance-none"
-            >
-              <option value="all">جميع التصنيفات</option>
-              {GENRES.map(g => <option key={g} value={g}>{g}</option>)}
-            </select>
-          </div>
-
+      {/* Basic Filter Bar */}
+      <div className="sticky top-[64px] md:top-[80px] z-40 bg-[#0a0a0a]/90 backdrop-blur-md border-y border-white/5 py-4">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-4">
+          <select value={activeType} onChange={(e) => setActiveType(e.target.value)} className="bg-[#1a1a1a] text-white px-4 py-2 rounded-full border border-gray-800 text-sm outline-none focus:border-red-600">
+            <option value="all">كل المحتوى</option>
+            <option value="movie">أفلام</option>
+            <option value="series">مسلسلات</option>
+          </select>
+          <select value={activeGenre} onChange={(e) => setActiveGenre(e.target.value)} className="bg-[#1a1a1a] text-white px-4 py-2 rounded-full border border-gray-800 text-sm outline-none focus:border-red-600">
+            <option value="all">كل التصنيفات</option>
+            {GENRES.map(g => <option key={g} value={g}>{g}</option>)}
+          </select>
           {(activeType !== 'all' || activeGenre !== 'all') && (
-            <button 
-              onClick={() => { setActiveType('all'); setActiveGenre('all'); }} 
-              className="flex items-center gap-2 text-red-500 text-xs font-black hover:bg-red-500/10 px-4 py-2 rounded-xl transition-all"
-            >
-              <X className="w-4 h-4" /> مسح الفلاتر
-            </button>
+            <button onClick={() => { setActiveType('all'); setActiveGenre('all'); }} className="text-red-500 text-xs font-bold hover:underline">مسح الفلاتر</button>
           )}
         </div>
       </div>
 
-      <div className="min-h-[600px]">
+      <div className="pb-12 min-h-[500px]">
         {filteredContent ? (
-          <div className="max-w-[1600px] mx-auto px-8 sm:px-12 mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-8 gap-y-12 animate-fadeInUp">
-            {filteredContent.map(movie => <MovieCard key={movie.id} movie={movie} className="card-hover-effect" />)}
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {filteredContent.map(movie => <MovieCard key={movie.id} movie={movie} />)}
           </div>
         ) : (
-          <div className="space-y-4">
-            <Carousel id="popular" title="الأكثر رواجاً" icon={<TrendingUp className="w-5 h-5 text-red-500" />} movies={sections.trending} variant="trending" />
-            <Carousel id="movies" title="أحدث الإضافات" icon={<Zap className="w-5 h-5 text-yellow-400 fill-current" />} movies={sections.recent} />
-            <Carousel id="series" title="مسلسلات مختارة" icon={<Tv className="w-5 h-5 text-purple-500" />} movies={sections.series} />
-            <Carousel title="عالم الأنيمي" icon={<Cat className="w-5 h-5 text-orange-500" />} movies={sections.anime} />
-            <Carousel title="أفلام الرعب" icon={<Ghost className="w-5 h-5 text-gray-400" />} movies={sections.horror} />
-            <Carousel title="دراما كورية وتركية" icon={<Globe className="w-5 h-5 text-emerald-500" />} movies={sections.korean} />
-            <Carousel title="الكوميديا والضحك" icon={<Laugh className="w-5 h-5 text-yellow-400" />} movies={sections.comedy} />
-            <Carousel title="مغامرة وخيال علمي" icon={<Rocket className="w-5 h-5 text-blue-500" />} movies={sections.adventure} />
-          </div>
+          <>
+            <Carousel title="رائج الآن" icon={<TrendingUp className="w-5 h-5 text-red-600" />} movies={sections.trending} variant="trending" />
+            <Carousel title="أضيف حديثاً" icon={<Zap className="w-5 h-5 text-yellow-500" />} movies={sections.recent} />
+            <Carousel title="مسلسلات مختارة" icon={<Tv className="w-5 h-5 text-purple-500" />} movies={sections.series} />
+            <Carousel title="أفلام الأكشن" icon={<Flame className="w-5 h-5 text-orange-500" />} movies={sections.action} />
+          </>
         )}
       </div>
 
+      {/* Welcome Toast Message */}
       {showWelcome && (
-        <div className="fixed bottom-10 left-10 z-[60] animate-fadeInUp">
-          <div className="bg-[#141414] border border-white/10 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] max-w-sm relative group overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 blur-3xl -z-10"></div>
-            <div className="flex items-start gap-5">
-              <div className="bg-red-600/10 p-3 rounded-2xl flex-shrink-0">
-                 <Sparkles className="w-7 h-7 text-red-600 animate-soft-pulse" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-black text-white text-lg">أهلاً بك في الإصدار الجديد!</h3>
-                  <button onClick={dismissWelcome} className="text-gray-600 hover:text-white transition-colors p-1">
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed font-medium">
-                  استمتع بتجربة مشاهدة محسنة، مساحات بصرية مريحة، وسرعة فائقة في التصفح. مشاهدة ممتعة!
-                </p>
-                <button 
-                  onClick={dismissWelcome}
-                  className="mt-5 w-full bg-white text-black font-black py-3 rounded-2xl hover:bg-gray-200 transition-all text-sm active:scale-95"
-                >
-                  استكشف الآن
+        <div className="fixed bottom-6 right-6 z-[60] animate-slideUp">
+          <div className="bg-[#1a1a1a]/95 backdrop-blur-xl border border-red-600/30 p-5 rounded-2xl shadow-2xl max-w-sm flex items-start gap-4">
+            <div className="bg-red-600/20 p-2.5 rounded-xl flex-shrink-0">
+               <Sparkles className="w-6 h-6 text-red-600 animate-pulse" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="font-black text-white text-lg">أهلاً بك في سينما ستريم!</h3>
+                <button onClick={dismissWelcome} className="text-gray-500 hover:text-white transition-colors">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                اكتشف عالمنا الجديد من الأفلام والمسلسلات الحصرية بأعلى جودة. مشاهدة ممتعة!
+              </p>
+              <button 
+                onClick={dismissWelcome}
+                className="mt-3 text-xs font-bold text-red-500 hover:text-red-400 transition-colors uppercase tracking-widest"
+              >
+                حسناً، فهمت
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      <footer className="max-w-[1600px] mx-auto px-8 sm:px-12 mt-20 pt-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
-         <div className="flex flex-col gap-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="bg-red-600 rounded-lg p-1"> <Film className="w-5 h-5 text-white" /> </div>
-              <span className="text-2xl font-black text-white tracking-tighter uppercase font-sans"> Cinema<span className="text-red-600">Stream</span> </span>
-            </Link>
-            <p className="text-gray-500 text-sm max-w-xs leading-loose">منصتك الأولى لمشاهدة أحدث الأفلام والمسلسلات بجودة عالية وتجربة سينمائية لا مثيل لها.</p>
-         </div>
-         <div className="flex flex-wrap gap-10 text-gray-500 text-sm font-bold">
-            <a href="#" className="hover:text-white transition-colors">عن المنصة</a>
-            <a href="#" className="hover:text-white transition-colors">سياسة الخصوصية</a>
-            <a href="#" className="hover:text-white transition-colors">شروط الاستخدام</a>
-            <a href="#" className="hover:text-white transition-colors">اتصل بنا</a>
-         </div>
-         <p className="text-gray-700 text-[10px] font-black uppercase tracking-widest">&copy; 2024 CinemaStream Cloud Infrastructure.</p>
+      <footer className="bg-black py-12 border-t border-white/5 text-center text-gray-600 text-xs">
+        <p>&copy; 2024 CinemaStream. All rights reserved. Connected to Cloud DB.</p>
       </footer>
     </div>
   );
