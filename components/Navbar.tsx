@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Menu, Film, User, X, PlayCircle, Tv } from 'lucide-react';
+/* Added ChevronLeft to imports */
+import { Search, Menu, Film, User, X, PlayCircle, Tv, ChevronLeft } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MovieService, supabase } from '../constants';
 import { Movie } from '../types';
@@ -28,27 +29,20 @@ const Navbar: React.FC = () => {
     };
     checkUser();
 
-    // Listen for auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsLoggedIn(!!session);
     });
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
 
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      
-      const inDesktop = searchRef.current && searchRef.current.contains(target);
-      const inMobileInput = mobileInputRef.current && mobileInputRef.current.contains(target);
-      const inMobileResults = mobileResultsRef.current && mobileResultsRef.current.contains(target);
-
-      if (!inDesktop && !inMobileInput && !inMobileResults) {
+      if (searchRef.current && !searchRef.current.contains(target)) {
         setSearchResults([]);
       }
-      
       if (menuRef.current && !menuRef.current.contains(target)) {
         setIsMenuOpen(false);
       }
@@ -60,7 +54,7 @@ const Navbar: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       authListener.subscription.unsubscribe();
     };
-  }, [location.pathname]);
+  }, []);
 
   useEffect(() => {
     setShowMobileSearch(false);
@@ -74,15 +68,18 @@ const Navbar: React.FC = () => {
       if (searchQuery.trim().length > 1) {
         const movies = await MovieService.getAll();
         const filtered = movies.filter(m => 
-          m.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-          m.description.includes(searchQuery)
+          m.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setSearchResults(filtered);
       } else {
         setSearchResults([]);
       }
     };
-    triggerSearch();
+    const delayDebounceFn = setTimeout(() => {
+      triggerSearch();
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
 
   const handleResultClick = (id: string) => {
@@ -96,7 +93,7 @@ const Navbar: React.FC = () => {
     { name: 'الرئيسية', path: '/' },
     { name: 'أفلام', path: '/#movies' },
     { name: 'مسلسلات', path: '/#series' },
-    { name: 'الأكثر مشاهدة', path: '/#popular' }
+    { name: 'رائج', path: '/#popular' }
   ];
 
   const handleNavClick = (e: React.MouseEvent, path: string) => {
@@ -109,7 +106,16 @@ const Navbar: React.FC = () => {
         const element = document.getElementById(id);
         if (element) {
           e.preventDefault();
-          element.scrollIntoView({ behavior: 'smooth' });
+          const offset = 100;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
           window.history.pushState(null, '', path);
         }
       }
@@ -118,27 +124,27 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent ${isScrolled ? 'bg-[#0f0f0f]/95 backdrop-blur-md border-white/5 shadow-xl' : 'bg-gradient-to-b from-black/80 to-transparent'}`}>
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-black/85 backdrop-blur-xl border-b border-white/10 shadow-2xl py-2' : 'bg-gradient-to-b from-black/90 via-black/40 to-transparent py-4'}`}>
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10">
+        <div className="flex items-center justify-between h-14 md:h-16">
           
-          <div className={`flex items-center gap-8 ${showMobileSearch ? 'hidden lg:flex' : 'flex'}`}>
-            <Link to="/" className="flex items-center gap-2 group" onClick={(e) => handleNavClick(e, '/')}>
-              <div className="bg-red-600 rounded p-1 group-hover:bg-white transition-colors">
-                 <Film className="w-6 h-6 text-white group-hover:text-red-600" />
+          <div className={`flex items-center gap-10 ${showMobileSearch ? 'hidden lg:flex' : 'flex'}`}>
+            <Link to="/" className="flex items-center gap-2.5 group transition-transform active:scale-95" onClick={(e) => handleNavClick(e, '/')}>
+              <div className="bg-red-600 rounded-lg p-1.5 shadow-lg shadow-red-600/20 group-hover:bg-red-500 transition-all">
+                 <Film className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl md:text-2xl font-black text-white tracking-tighter uppercase font-sans">
                 Cinema<span className="text-red-600">Stream</span>
               </span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-1 text-sm font-medium text-gray-300">
+            <div className="hidden lg:flex items-center gap-2">
               {navLinks.map((item) => (
                 <Link 
                   key={item.name}
                   to={item.path} 
                   onClick={(e) => handleNavClick(e, item.path)}
-                  className="px-4 py-2 rounded-full hover:bg-white/10 hover:text-white transition-all"
+                  className="px-4 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-all"
                 >
                   {item.name}
                 </Link>
@@ -146,24 +152,24 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <div className={`flex items-center gap-4 ${showMobileSearch ? 'w-full lg:w-auto' : ''}`}>
+          <div className={`flex items-center gap-5 ${showMobileSearch ? 'w-full lg:w-auto' : ''}`}>
              
              {showMobileSearch && (
-               <div ref={mobileInputRef} className="flex-1 flex items-center gap-2 lg:hidden animate-fadeIn w-full">
+               <div ref={mobileInputRef} className="flex-1 flex items-center gap-3 lg:hidden animate-fadeIn w-full">
                  <div className="relative flex-1">
                    <input 
                      autoFocus
                      type="text" 
-                     placeholder="ابحث عن فيلم..." 
+                     placeholder="عن ماذا تبحث اليوم؟" 
                      value={searchQuery}
                      onChange={(e) => setSearchQuery(e.target.value)}
-                     className="w-full bg-[#1a1a1a] border border-red-900/50 text-white text-sm rounded-full px-4 py-2.5 pl-10 pr-4 focus:outline-none focus:border-red-600 shadow-lg"
+                     className="w-full bg-[#141414] border border-white/10 text-white text-sm rounded-2xl px-5 py-3 pl-12 focus:outline-none focus:border-red-600 shadow-2xl transition-all"
                    />
-                   <Search className="w-4 h-4 text-gray-400 absolute right-3 top-3" />
+                   <Search className="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" />
                  </div>
                  <button 
                    onClick={() => { setShowMobileSearch(false); setSearchQuery(''); }}
-                   className="p-2 text-gray-400 hover:text-white bg-white/5 rounded-full cursor-pointer"
+                   className="p-3 text-gray-400 hover:text-white bg-white/5 rounded-2xl transition-all active:scale-90"
                  >
                    <X className="w-5 h-5" />
                  </button>
@@ -171,33 +177,35 @@ const Navbar: React.FC = () => {
              )}
 
             <div className="hidden lg:flex relative group" ref={searchRef}>
-              <input 
-                type="text" 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="ابحث عن فيلم..." 
-                className="bg-[#1a1a1a]/80 backdrop-blur border border-white/5 group-hover:border-white/20 text-white text-sm rounded-full px-4 py-2.5 pl-10 pr-12 focus:outline-none focus:border-red-600 focus:bg-black transition-all w-64 focus:w-80 shadow-inner"
-              />
-              <Search className="w-4 h-4 text-gray-400 absolute right-4 top-3.5" />
+              <div className="relative">
+                <input 
+                  type="text" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="بحث سريع..." 
+                  className="bg-[#141414]/60 border border-white/10 group-hover:border-white/30 text-white text-sm rounded-2xl px-5 py-2.5 pl-12 focus:outline-none focus:border-red-600 focus:bg-black transition-all w-56 focus:w-80"
+                />
+                <Search className="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" />
+              </div>
               
               {searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-gray-800 rounded-xl shadow-2xl overflow-hidden max-h-96 overflow-y-auto z-50">
+                <div className="absolute top-full right-0 mt-3 bg-[#111] border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden w-80 max-h-[500px] overflow-y-auto z-[100] animate-fadeInUp">
+                  <div className="p-3 border-b border-white/5 bg-black/50">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">نتائج البحث</span>
+                  </div>
                   {searchResults.map(movie => (
                     <button 
                       key={movie.id}
                       onClick={() => handleResultClick(movie.id)}
-                      className="w-full flex items-center gap-3 p-3 hover:bg-white/5 transition-colors border-b border-gray-800 last:border-0 text-right group/item cursor-pointer"
+                      className="w-full flex items-center gap-4 p-3.5 hover:bg-white/5 transition-all text-right group/item border-b border-white/5 last:border-0"
                     >
-                      <img src={movie.thumbnailUrl} alt={movie.title} className="w-10 h-14 object-cover rounded" />
+                      <img src={movie.thumbnailUrl} alt={movie.title} className="w-10 h-14 object-cover rounded-lg shadow-lg group-hover/item:scale-105 transition-transform" />
                       <div className="flex-1 min-w-0">
                         <h4 className="text-white font-bold text-sm truncate group-hover/item:text-red-500 transition-colors" dir="ltr">{movie.title}</h4>
-                        <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
+                        <div className="flex items-center gap-2 text-[10px] text-gray-500 mt-1 font-bold">
                           <span>{movie.year}</span>
-                          <span className="w-1 h-1 bg-gray-600 rounded-full"></span>
-                          <span className="flex items-center gap-1">
-                             {movie.type === 'series' ? <Tv className="w-3 h-3" /> : <PlayCircle className="w-3 h-3" />}
-                             {movie.type === 'series' ? 'مسلسل' : 'فيلم'}
-                          </span>
+                          <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
+                          <span className="bg-white/5 px-2 py-0.5 rounded uppercase">{movie.type === 'series' ? 'مسلسل' : 'فيلم'}</span>
                         </div>
                       </div>
                     </button>
@@ -206,25 +214,24 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            <div className={`flex items-center gap-3 ${showMobileSearch ? 'hidden lg:flex' : 'flex'}`}>
+            <div className={`flex items-center gap-4 ${showMobileSearch ? 'hidden lg:flex' : 'flex'}`}>
               <button 
                 onClick={() => setShowMobileSearch(true)}
-                className="lg:hidden w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-red-600 transition-colors cursor-pointer"
+                className="lg:hidden w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all active:scale-90"
               >
                 <Search className="w-5 h-5" />
               </button>
 
               <Link 
                 to={isLoggedIn ? "/profile" : "/login"} 
-                className={`w-10 h-10 rounded-full border flex items-center justify-center text-white transition-colors shadow-lg cursor-pointer ${isLoggedIn ? 'bg-red-600 border-red-600 hover:bg-red-700' : 'bg-gradient-to-br from-gray-700 to-gray-900 border-white/10 hover:border-red-600'}`}
-                title={isLoggedIn ? "ملفي الشخصي" : "تسجيل الدخول"}
+                className={`w-11 h-11 rounded-2xl border flex items-center justify-center transition-all shadow-xl active:scale-95 ${isLoggedIn ? 'bg-red-600 border-red-500 text-white shadow-red-600/20' : 'bg-[#141414] border-white/10 text-gray-400 hover:border-red-600'}`}
               >
                 <User className="w-5 h-5" />
               </Link>
 
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-red-600 transition-colors cursor-pointer"
+                className="lg:hidden w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-all active:scale-90"
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -232,52 +239,26 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {showMobileSearch && searchResults.length > 0 && (
-            <div ref={mobileResultsRef} className="lg:hidden absolute top-full left-0 right-0 bg-[#0f0f0f] border-b border-gray-800 max-h-[70vh] overflow-y-auto shadow-2xl z-40">
-                 {searchResults.map(movie => (
-                    <button 
-                      key={movie.id}
-                      onClick={() => handleResultClick(movie.id)}
-                      className="w-full flex items-center gap-3 p-4 hover:bg-white/5 transition-colors border-b border-gray-800 text-right cursor-pointer"
-                    >
-                      <img src={movie.thumbnailUrl} alt={movie.title} className="w-12 h-16 object-cover rounded shadow-sm" />
-                      <div className="flex-1">
-                        <h4 className="text-white font-bold text-base mb-1" dir="ltr">{movie.title}</h4>
-                        <div className="flex items-center gap-2 text-xs text-gray-400">
-                          <span>{movie.year}</span>
-                          <span className="px-2 py-0.5 bg-gray-800 rounded text-gray-300">{movie.quality}</span>
-                          <span className="flex items-center gap-1">
-                             {movie.type === 'series' ? <Tv className="w-3 h-3" /> : <PlayCircle className="w-3 h-3" />}
-                          </span>
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-            </div>
-        )}
-
-        {isMenuOpen && !showMobileSearch && (
-          <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 bg-[#0f0f0f]/95 backdrop-blur-xl border-t border-gray-800 shadow-2xl z-40 animate-fadeIn">
-            <div className="flex flex-col p-4 gap-2">
+        {isMenuOpen && (
+          <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 glass-effect border-t border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.9)] z-50 animate-fadeIn overflow-hidden">
+            <div className="flex flex-col p-6 gap-3">
               {navLinks.map((item) => (
                 <Link 
                   key={item.name}
                   to={item.path}
                   onClick={(e) => handleNavClick(e, item.path)}
-                  className="px-4 py-3 rounded-xl hover:bg-white/10 hover:text-white text-gray-300 transition-all font-medium flex items-center justify-between group"
+                  className="px-5 py-4 rounded-2xl hover:bg-white/5 text-gray-300 hover:text-white transition-all font-bold flex items-center justify-between group"
                 >
                   {item.name}
-                  <span className="w-2 h-2 rounded-full bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  <ChevronLeft className="w-4 h-4 text-gray-600 group-hover:text-red-600 group-hover:translate-x-[-4px] transition-all" />
                 </Link>
               ))}
-              <div className="h-px bg-gray-800 my-2"></div>
+              <div className="h-px bg-white/5 my-3"></div>
               <Link 
                 to={isLoggedIn ? "/profile" : "/login"}
-                onClick={() => setIsMenuOpen(false)} 
-                className={`px-4 py-3 rounded-xl transition-all font-bold flex items-center justify-center gap-2 ${isLoggedIn ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-red-600/10 text-red-500 hover:bg-red-600 hover:text-white'}`}
+                className="px-5 py-4 rounded-2xl bg-red-600 text-white text-center font-black shadow-lg shadow-red-600/20 active:scale-[0.98] transition-all"
               >
-                <User className="w-4 h-4" />
-                {isLoggedIn ? 'ملفي الشخصي' : 'تسجيل الدخول / حسابي'}
+                {isLoggedIn ? 'ملفي الشخصي' : 'تسجيل الدخول'}
               </Link>
             </div>
           </div>
