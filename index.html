@@ -4,64 +4,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>سينما ستريم - مشاهدة ممتعة</title>
+    <title>سينما ستريم - تجربة مشاهدة سينمائية فريدة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --brand-red: #e50914;
+        --brand-dark: #0a0a0a;
+        --brand-card: #141414;
+      }
       html {
         scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
       }
       body {
         font-family: 'Cairo', sans-serif;
+        background-color: var(--brand-dark);
+        color: white;
+        overflow-x: hidden;
       }
-      /* Custom Scrollbar for Webkit */
+      ::selection {
+        background-color: var(--brand-red);
+        color: white;
+      }
+      /* Custom Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
       }
       ::-webkit-scrollbar-track {
-        background: #1a1a1a; 
+        background: #000;
       }
       ::-webkit-scrollbar-thumb {
-        background: #e50914; 
-        border-radius: 4px;
+        background: #333;
+        border-radius: 10px;
+        border: 2px solid #000;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #b20710; 
+        background: var(--brand-red);
       }
       
-      /* Animation Keyframes */
+      /* Animations */
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
       @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
       }
-      @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+      @keyframes scaleIn {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
       }
-      @keyframes slideUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
+      .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      .animate-fadeIn { animation: fadeIn 0.6s ease-out forwards; }
+      .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
+      
+      @keyframes softPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+      }
+      .animate-soft-pulse { animation: softPulse 3s infinite ease-in-out; }
+
+      .glass-effect {
+        background: rgba(15, 15, 15, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      
+      .text-shadow-lg {
+        text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+      }
+
+      /* Hover Effects */
+      .card-hover-effect {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover-effect:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/+esm"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-  <body class="bg-black text-white overflow-x-hidden">
+    <script type="importmap">
+    {
+      "imports": {
+        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+        "react/": "https://aistudiocdn.com/react@^19.2.1/",
+        "react": "https://aistudiocdn.com/react@^19.2.1",
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+        "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.1/+esm"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-black text-white">
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
